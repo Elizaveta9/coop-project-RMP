@@ -35,6 +35,8 @@ public class MenuState extends State {
 
     @Override
     public void render(SpriteBatch batch) {
+        batch.setProjectionMatrix(camera.combined);
+
         batch.begin();
         batch.draw(background, 0, 0, Game.WIDTH, Game.HEIGHT);
         batch.draw(logo, (Game.WIDTH / 2) - (logo.getWidth() / 2), Game.HEIGHT - logo.getHeight()-20);
