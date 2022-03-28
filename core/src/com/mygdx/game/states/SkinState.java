@@ -52,7 +52,6 @@ public class SkinState extends State {
                     (mouse.y > (Game.HEIGHT - logo.getHeight() - 20 - greenSkinButton.getHeight() - 20 - pinkSkinButton.getHeight() - 20 - whiteSkinButton.getHeight() )) &&
                     (mouse.y < (Game.HEIGHT - logo.getHeight() - 20 - greenSkinButton.getHeight() - 20 - pinkSkinButton.getHeight()) - 20)) {
                 sm.set(new PlayState(sm, "whiteCar.png"));}}
-
     }
 
     @Override
