@@ -31,7 +31,7 @@ public class MenuState extends State {
                     (mouse.x < (Game.WIDTH / 2) + (newGameButton.getWidth() / 2)) &&
                     (mouse.y > (Game.HEIGHT / 3)) &&
                     (mouse.y < (Game.HEIGHT / 3) + newGameButton.getHeight())) {
-                sm.set(new PlayState(sm));
+                sm.set(new PlayState(sm)); //сюда вместо PlayState(sm) вставить класс окна выбора скина
             }
         }
     }
