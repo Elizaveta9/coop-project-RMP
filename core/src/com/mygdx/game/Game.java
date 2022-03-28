@@ -21,7 +21,7 @@ public class Game extends ApplicationAdapter {
 	public void create () {
 		batch = new SpriteBatch();
 		stateManager = new StateManager();
-//		ScreenUtils.clear(1, 0, 0, 1);
+		ScreenUtils.clear(1, 0, 0, 1);
 		stateManager.push(new MenuState(stateManager));
 	}
 
