@@ -9,7 +9,7 @@ public class PlayState extends State {
 
     private Texture logo;
 
-    public PlayState(StateManager sm) {
+    public PlayState(StateManager sm, String streetCar) {
         super(sm);
         logo = new Texture("logo.png");
 
