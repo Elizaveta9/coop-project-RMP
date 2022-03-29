@@ -9,7 +9,7 @@ import com.mygdx.game.Game;
 public abstract class State {
 
     protected OrthographicCamera camera;
-    protected Vector3 mouse;
+    protected Vector3 mouse; //должен быть Vector3, но он для 3D. Если что-то идёт не так, меняем обратно на Vector3
     protected StateManager sm;
 
     public State(StateManager sm){

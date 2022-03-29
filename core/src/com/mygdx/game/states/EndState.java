@@ -12,15 +12,18 @@ import com.mygdx.game.Game;
 public class EndState extends State {
     private Texture background;
     private Texture restartGameButton;
-    private Texture newRecord;
-    private Texture oldRecord;
+    private Texture newRecordImage;
+    private Texture oldRecordImage;
+    private String streetCar;
+    private int newRecord;
 
-    public EndState(StateManager sm) {
+    public EndState(StateManager sm, String streetCar, int newRecord) {
         super(sm);
+        this.streetCar = streetCar;
         background = new Texture("bg-road586x900.png");
         restartGameButton = new Texture("restart-game-button.png");
-        newRecord = new Texture("new-record.png");
-        oldRecord = new Texture("old-record.png");
+        newRecordImage = new Texture("new-record.png");
+        oldRecordImage = new Texture("old-record.png");
     }
 
     @Override
@@ -32,7 +35,7 @@ public class EndState extends State {
                 (mouse.x < (Game.WIDTH / 2) + (restartGameButton.getWidth() / 2)) &&
                 (mouse.y > (Game.HEIGHT / 3)) &&
                 (mouse.y < (Game.HEIGHT / 3) + restartGameButton.getHeight())) {
-            sm.set(new PlayState(sm)); //сюда вместо PlayState(sm) вставить класс окна выбора скина
+            sm.set(new PlayState(sm, streetCar)); //сюда вместо PlayState(sm) вставить класс окна выбора скина
         }
     }
 }
@@ -48,7 +51,7 @@ public class EndState extends State {
 
         batch.begin();
         batch.draw(background, 0, 0, Game.WIDTH, Game.HEIGHT);
-        batch.draw(newRecord, (Game.WIDTH / 2) - (newRecord.getWidth() / 2), Game.HEIGHT - newRecord.getHeight() - 20);
+        batch.draw(newRecordImage, (Game.WIDTH / 2) - (newRecordImage.getWidth() / 2), Game.HEIGHT - newRecordImage.getHeight() - 20);
         batch.draw(restartGameButton, (Game.WIDTH / 2) - (restartGameButton.getWidth() / 2), Game.HEIGHT / 3);
         batch.end();
     }
@@ -57,7 +60,7 @@ public class EndState extends State {
     public void dispose() {
         background.dispose();
         restartGameButton.dispose();
-        newRecord.dispose();
-        oldRecord.dispose();
+        newRecordImage.dispose();
+        oldRecordImage.dispose();
     }
 }
