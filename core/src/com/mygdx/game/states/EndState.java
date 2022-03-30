@@ -11,7 +11,7 @@ import com.badlogic.gdx.utils.ScreenUtils;
 import com.mygdx.game.Game;
 
 public class EndState extends State {
-    private Texture background;
+
     private Texture restartGameButton;
     private Texture newRecordImage;
     private Texture oldRecordImage;
@@ -23,7 +23,6 @@ public class EndState extends State {
         super(sm);
         this.streetCar = streetCar;
         this.record = record;
-        background = new Texture("bg-road586x900.png");
         restartGameButton = new Texture("restart-game-button.png");
         newRecordImage = new Texture("new-record.png");
         oldRecordImage = new Texture("old-record.png");

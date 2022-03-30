@@ -11,13 +11,11 @@ import com.mygdx.game.Game;
 
 public class MenuState extends State {
 
-    private Texture background;
     private Texture newGameButton;
     private Texture logo;
 
     public MenuState(StateManager sm) {
         super(sm);
-        background = new Texture("bg-road586x900.png");
         newGameButton = new Texture("new-game-button.png");
         logo = new Texture("logo.png");
     }
@@ -31,7 +29,7 @@ public class MenuState extends State {
                     (mouse.x < (Game.WIDTH / 2) + (newGameButton.getWidth() / 2)) &&
                     (mouse.y > (Game.HEIGHT / 3)) &&
                     (mouse.y < (Game.HEIGHT / 3) + newGameButton.getHeight())) {
-                sm.set(new SkinState(sm)); //сюда вместо PlayState(sm) вставить класс окна выбора скина
+                sm.set(new SkinState(sm));
             }
         }
     }

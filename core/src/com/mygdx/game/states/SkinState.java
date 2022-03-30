@@ -7,7 +7,6 @@ import com.mygdx.game.Game;
 
 public class SkinState extends State {
 
-    private Texture background;
     private Texture whiteSkinButton;
     private Texture pinkSkinButton;
     private Texture greenSkinButton;
@@ -15,13 +14,10 @@ public class SkinState extends State {
 
     public SkinState(StateManager sm) {
         super(sm);
-        background = new Texture("bg-road586x900.png");
         logo = new Texture("logo.png");
         whiteSkinButton = new Texture("whiteCar.png");
         greenSkinButton = new Texture("greenCar.png");
         pinkSkinButton = new Texture("pinkCar.png");
-
-
     }
 
     @Override
