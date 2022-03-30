@@ -3,6 +3,7 @@ package com.mygdx.game;
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.mygdx.game.states.MenuState;
@@ -18,9 +19,11 @@ public class Game extends ApplicationAdapter {
 	private StateManager stateManager;
 
 	SpriteBatch batch;
+	BitmapFont font;
 
 	@Override
 	public void create () {
+		font = new BitmapFont();
 		batch = new SpriteBatch();
 		stateManager = new StateManager();
 		ScreenUtils.clear(1, 0, 0, 1);
@@ -32,7 +35,7 @@ public class Game extends ApplicationAdapter {
 
 		stateManager.update(Gdx.graphics.getDeltaTime());
 		try {
-			stateManager.render(batch);
+			stateManager.render(batch, font);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -41,5 +44,6 @@ public class Game extends ApplicationAdapter {
 	@Override
 	public void dispose () {
 		batch.dispose();
+		font.dispose();
 	}
 }

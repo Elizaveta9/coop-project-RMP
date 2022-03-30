@@ -5,7 +5,9 @@ package com.mygdx.game.states;
  */
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.mygdx.game.Game;
 
@@ -13,16 +15,19 @@ public class MenuState extends State {
 
     private Texture newGameButton;
     private Texture logo;
+    private Sound sound;
 
     public MenuState(StateManager sm) {
         super(sm);
         newGameButton = new Texture("new-game-button.png");
         logo = new Texture("logo.png");
+        sound = Gdx.audio.newSound(Gdx.files.internal("buttonClick.mp3"));
     }
 
     @Override
     protected void handleInput() {
         if (Gdx.input.justTouched()) {
+            sound.play(0.3f);
             mouse.set(Gdx.input.getX(), Gdx.input.getY(), 0);
             camera.unproject(mouse);
             if ((mouse.x > (Game.WIDTH / 2) - (newGameButton.getWidth() / 2)) &&
@@ -40,7 +45,7 @@ public class MenuState extends State {
     }
 
     @Override
-    public void render(SpriteBatch batch) {
+    public void render(SpriteBatch batch, BitmapFont font) {
         batch.setProjectionMatrix(camera.combined);
 
         batch.begin();

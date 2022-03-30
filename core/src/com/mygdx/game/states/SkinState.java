@@ -2,6 +2,7 @@ package com.mygdx.game.states;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.mygdx.game.Game;
 
@@ -56,7 +57,7 @@ public class SkinState extends State {
     }
 
     @Override
-    public void render(SpriteBatch batch) {
+    public void render(SpriteBatch batch, BitmapFont font) {
         batch.setProjectionMatrix(camera.combined);
         batch.begin();
         batch.draw(background, 0, 0, Game.WIDTH, Game.HEIGHT);
