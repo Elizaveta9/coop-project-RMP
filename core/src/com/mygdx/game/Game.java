@@ -8,6 +8,8 @@ import com.badlogic.gdx.utils.ScreenUtils;
 import com.mygdx.game.states.MenuState;
 import com.mygdx.game.states.StateManager;
 
+import java.io.IOException;
+
 public class Game extends ApplicationAdapter {
 	public static final int WIDTH = 480;
 	public static final int HEIGHT = 800;
@@ -29,7 +31,11 @@ public class Game extends ApplicationAdapter {
 	public void render () {
 
 		stateManager.update(Gdx.graphics.getDeltaTime());
-		stateManager.render(batch);
+		try {
+			stateManager.render(batch);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	@Override

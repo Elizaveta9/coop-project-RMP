@@ -9,7 +9,7 @@ import java.io.IOException;
 
 public class Records {
 
-    static private String pathFile = "core/java/com/mygdx/game/record.txt";
+    static private String pathFile = "Record\\record.txt";
 
     public static void setRecords(int record) throws IOException {
         File file = new File(pathFile);

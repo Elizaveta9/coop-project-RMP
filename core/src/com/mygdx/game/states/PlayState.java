@@ -21,7 +21,7 @@ public class PlayState extends State {
 
     private Texture logo;
     private String streetCar;
-    private int record;
+    private int record = 0;
     private Texture carTexture;
 
     public PlayState(StateManager sm, String streetCar) {

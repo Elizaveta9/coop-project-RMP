@@ -7,6 +7,8 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.mygdx.game.Game;
 
+import java.io.IOException;
+
 public abstract class State {
 
     protected OrthographicCamera camera;
@@ -28,7 +30,7 @@ public abstract class State {
     public abstract void update(float dt);
 
     //рисует экран (SpriteBatch предоставляет координаты и текстуру для фигур)
-    public abstract void render(SpriteBatch batch);
+    public abstract void render(SpriteBatch batch) throws IOException;
 
     //освобождает рисурсы
     public abstract void dispose();
