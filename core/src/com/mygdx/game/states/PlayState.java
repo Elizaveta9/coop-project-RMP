@@ -9,17 +9,6 @@ import com.mygdx.game.Game;
 
 import java.util.List;
 
-/*
-координаты x для полос дороги:
-    1 -
-        110
-    2 -
-        125
-    3 -
-        110
-    4 -
- */
-
 public class PlayState extends State {
 
     private String streetCar;
@@ -31,7 +20,6 @@ public class PlayState extends State {
         super(sm);
         try {
             car = new CarPicture(streetCar);
-
             car.x = car.getLine();
             car.y = 20;
         } catch (Exception e) {
@@ -41,15 +29,13 @@ public class PlayState extends State {
 
     @Override
     protected void handleInput() {
-//        if (Gdx.input.justTouched()) {
-//            sm.set(new EndState(sm, streetCar, record));
-//        }
 
         if (Gdx.input.justTouched()) {
             mouse.set(Gdx.input.getX(), Gdx.input.getY(), 0);
             camera.unproject(mouse);
             if (mouse.x > (Game.WIDTH / 2)) {
-                car.x = car.getRightLine();
+//                car.x = car.getRightLine();
+                car.goRight();
             }
         }
 
@@ -57,7 +43,8 @@ public class PlayState extends State {
             mouse.set(Gdx.input.getX(), Gdx.input.getY(), 0);
             camera.unproject(mouse);
             if (mouse.x < (Game.WIDTH / 2)) {
-                car.x = car.getLeftLine();
+//                car.x = car.getLeftLine();
+                car.goLeft();
             }
         }
     }
@@ -65,6 +52,7 @@ public class PlayState extends State {
     @Override
     public void update(float dt) {
         handleInput();
+        car.move();
     }
 
     @Override
