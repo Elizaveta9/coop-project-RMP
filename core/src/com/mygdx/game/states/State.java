@@ -2,6 +2,7 @@ package com.mygdx.game.states;
 
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
@@ -30,7 +31,7 @@ public abstract class State {
     public abstract void update(float dt);
 
     //рисует экран (SpriteBatch предоставляет координаты и текстуру для фигур)
-    public abstract void render(SpriteBatch batch) throws IOException;
+    public abstract void render(SpriteBatch batch, BitmapFont font) throws IOException;
 
     //освобождает рисурсы
     public abstract void dispose();
