@@ -1,6 +1,7 @@
 package com.mygdx.game.states;
 
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
@@ -11,6 +12,7 @@ public abstract class State {
     protected OrthographicCamera camera;
     protected Vector3 mouse; //должен быть Vector3, но он для 3D. Если что-то идёт не так, меняем обратно на Vector3
     protected StateManager sm;
+    protected Texture background = new Texture("bg-road586x900.png");
 
     public State(StateManager sm){
         this.sm = sm;
