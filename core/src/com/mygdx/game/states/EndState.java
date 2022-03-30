@@ -32,20 +32,20 @@ public class EndState extends State {
     @Override
     protected void handleInput() {
         if (Gdx.input.justTouched()) {
-        mouse.set(Gdx.input.getX(), Gdx.input.getY(), 0);
-        camera.unproject(mouse);
-        if ((mouse.x > (Game.WIDTH / 2) - (restartGameButton.getWidth() / 2)) &&
-                (mouse.x < (Game.WIDTH / 2) + (restartGameButton.getWidth() / 2)) &&
-                (mouse.y > (Game.HEIGHT / 3)) &&
-                (mouse.y < (Game.HEIGHT / 3) + restartGameButton.getHeight())) {
-            sm.set(new PlayState(sm, streetCar));
+            mouse.set(Gdx.input.getX(), Gdx.input.getY(), 0);
+            camera.unproject(mouse);
+            if ((mouse.x > (Game.WIDTH / 2) - (restartGameButton.getWidth() / 2)) &&
+                    (mouse.x < (Game.WIDTH / 2) + (restartGameButton.getWidth() / 2)) &&
+                    (mouse.y > (Game.HEIGHT / 3)) &&
+                    (mouse.y < (Game.HEIGHT / 3) + restartGameButton.getHeight())) {
+                sm.set(new SkinState(sm));
+            }
         }
     }
-}
 
     @Override
     public void update(float dt) {
-
+        handleInput();
     }
 
     @Override
@@ -54,10 +54,11 @@ public class EndState extends State {
 
         batch.begin();
         batch.draw(background, 0, 0, Game.WIDTH, Game.HEIGHT);
-        if(newRecord > record){newRecord = record;
+        if (newRecord > record) {
+            newRecord = record;
             batch.draw(newRecordImage, (Game.WIDTH / 2) - (newRecordImage.getWidth() / 2), Game.HEIGHT - newRecordImage.getHeight() - 20);
         }
-            batch.draw(oldRecordImage, (Game.WIDTH / 2) - (oldRecordImage.getWidth() / 2), Game.HEIGHT - oldRecordImage.getHeight() - 20);
+        batch.draw(oldRecordImage, (Game.WIDTH / 2) - (oldRecordImage.getWidth() / 2), Game.HEIGHT - oldRecordImage.getHeight() - 20);
         batch.draw(restartGameButton, (Game.WIDTH / 2) - (restartGameButton.getWidth() / 2), Game.HEIGHT / 3);
         batch.end();
     }
