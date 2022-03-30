@@ -7,6 +7,7 @@ package com.mygdx.game.states;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.utils.ScreenUtils;
 import com.mygdx.game.Game;
 
 public class EndState extends State {
@@ -16,10 +17,12 @@ public class EndState extends State {
     private Texture oldRecordImage;
     private String streetCar;
     private int newRecord;
+    private int record;
 
-    public EndState(StateManager sm, String streetCar, int newRecord) {
+    public EndState(StateManager sm, String streetCar, int record) {
         super(sm);
         this.streetCar = streetCar;
+        this.record = record;
         background = new Texture("bg-road586x900.png");
         restartGameButton = new Texture("restart-game-button.png");
         newRecordImage = new Texture("new-record.png");
@@ -35,7 +38,7 @@ public class EndState extends State {
                 (mouse.x < (Game.WIDTH / 2) + (restartGameButton.getWidth() / 2)) &&
                 (mouse.y > (Game.HEIGHT / 3)) &&
                 (mouse.y < (Game.HEIGHT / 3) + restartGameButton.getHeight())) {
-            sm.set(new PlayState(sm, streetCar)); //сюда вместо PlayState(sm) вставить класс окна выбора скина
+            sm.set(new PlayState(sm, streetCar));
         }
     }
 }
@@ -51,7 +54,10 @@ public class EndState extends State {
 
         batch.begin();
         batch.draw(background, 0, 0, Game.WIDTH, Game.HEIGHT);
-        batch.draw(newRecordImage, (Game.WIDTH / 2) - (newRecordImage.getWidth() / 2), Game.HEIGHT - newRecordImage.getHeight() - 20);
+        if(newRecord > record){newRecord = record;
+            batch.draw(newRecordImage, (Game.WIDTH / 2) - (newRecordImage.getWidth() / 2), Game.HEIGHT - newRecordImage.getHeight() - 20);
+        }
+            batch.draw(oldRecordImage, (Game.WIDTH / 2) - (oldRecordImage.getWidth() / 2), Game.HEIGHT - oldRecordImage.getHeight() - 20);
         batch.draw(restartGameButton, (Game.WIDTH / 2) - (restartGameButton.getWidth() / 2), Game.HEIGHT / 3);
         batch.end();
     }
