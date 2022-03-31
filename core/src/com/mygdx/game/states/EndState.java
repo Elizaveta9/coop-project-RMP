@@ -20,36 +20,36 @@ public class EndState extends State {
     private Texture restartGameButton;
     private Texture newRecordImage;
     private Texture oldRecordImage;
-    private Sound sound;
+    private Sound tapSound;
     private String streetCar;
-    private int newScore;
+    private int score;
     private int record;
     private String recordString;
-    private String newScoreString;
+    private String scoreString;
 
     public EndState(StateManager sm, String streetCar, int record) {
         super(sm);
         this.streetCar = streetCar;
-        this.newScore = record;
+        this.score = record;
 
         restartGameButton = new Texture("restart-game-button.png");
         newRecordImage = new Texture("new-record.png");
         oldRecordImage = new Texture("old-record.png");
+        tapSound = Gdx.audio.newSound(Gdx.files.internal("buttonClick.mp3"));
         recordString = Integer.toString(record);
-        newScoreString = Integer.toString(newScore);
-        sound = Gdx.audio.newSound(Gdx.files.internal("buttonClick.mp3"));
+        scoreString = Integer.toString(score);
     }
 
     @Override
     protected void handleInput() {
         if (Gdx.input.justTouched()) {
-            sound.play(0.3f);
             mouse.set(Gdx.input.getX(), Gdx.input.getY(), 0);
             camera.unproject(mouse);
             if ((mouse.x > (Game.WIDTH / 2) - (restartGameButton.getWidth() / 2)) &&
                     (mouse.x < (Game.WIDTH / 2) + (restartGameButton.getWidth() / 2)) &&
                     (mouse.y > (Game.HEIGHT / 3)) &&
                     (mouse.y < (Game.HEIGHT / 3) + restartGameButton.getHeight())) {
+                tapSound.play(0.3f);
                 sm.set(new SkinState(sm));
             }
         }
@@ -65,15 +65,18 @@ public class EndState extends State {
         batch.setProjectionMatrix(camera.combined);
         batch.begin();
         batch.draw(background, 0, 0, Game.WIDTH, Game.HEIGHT);
-        record = Records.getRecords();
         font.getData().setScale(3,3);
-        if (newScore > record) { Records.setRecords(newScore);
-
-            font.draw(batch, newScoreString, 380, 720);
-
+        record = Records.getRecords();
+        recordString = Integer.toString(record);
+        if (score > record) {
+            Records.setRecords(score);
+            font.draw(batch, scoreString, 380, 630);
             batch.draw(newRecordImage, (Game.WIDTH / 2) - (newRecordImage.getWidth() / 2 + 60), Game.HEIGHT - newRecordImage.getHeight() - 20);
-        } else { batch.draw(oldRecordImage, (Game.WIDTH / 2) - (oldRecordImage.getWidth() / 2 + 60), Game.HEIGHT - oldRecordImage.getHeight() - 20);
-        font.draw(batch, recordString, 380, 630);}
+        } else {
+            batch.draw(oldRecordImage, (Game.WIDTH / 2) - (oldRecordImage.getWidth() / 2 + 60), Game.HEIGHT - oldRecordImage.getHeight() - 20);
+            font.draw(batch, scoreString, 380, 720);
+            font.draw(batch, recordString, 380, 630);
+        }
         batch.draw(restartGameButton, (Game.WIDTH / 2) - (restartGameButton.getWidth() / 2), Game.HEIGHT / 3);
         batch.end();
     }
