@@ -5,6 +5,7 @@ package com.mygdx.game.states;
  */
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
@@ -15,25 +16,30 @@ public class MenuState extends State {
 
     private Texture newGameButton;
     private Texture logo;
-    private Sound sound;
+    private Sound tapSound;
+    private Music music;
 
     public MenuState(StateManager sm) {
         super(sm);
         newGameButton = new Texture("new-game-button.png");
         logo = new Texture("logo.png");
-        sound = Gdx.audio.newSound(Gdx.files.internal("buttonClick.mp3"));
+        tapSound = Gdx.audio.newSound(Gdx.files.internal("buttonClick.mp3"));
+        music = Gdx.audio.newMusic(Gdx.files.internal("music.mp3"));
+        music.setLooping(true);
+        music.setVolume(0.1f);
+        music.play();
     }
 
     @Override
     protected void handleInput() {
         if (Gdx.input.justTouched()) {
-            sound.play(0.3f);
             mouse.set(Gdx.input.getX(), Gdx.input.getY(), 0);
             camera.unproject(mouse);
             if ((mouse.x > (Game.WIDTH / 2) - (newGameButton.getWidth() / 2)) &&
                     (mouse.x < (Game.WIDTH / 2) + (newGameButton.getWidth() / 2)) &&
                     (mouse.y > (Game.HEIGHT / 3)) &&
                     (mouse.y < (Game.HEIGHT / 3) + newGameButton.getHeight())) {
+                tapSound.play(0.3f);
                 sm.set(new SkinState(sm));
             }
         }
