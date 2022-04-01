@@ -20,16 +20,14 @@ public class EndState extends State {
     private Texture newRecordImage;
     private Texture oldRecordImage;
     private Sound tapSound;
-    private String streetCar;
     private int score;
     private int record;
     private String recordString;
     private String scoreString;
 
-    public EndState(StateManager sm, String streetCar, int record) {
+    public EndState(StateManager sm, int record) {
         super(sm);
-        this.streetCar = streetCar;
-        this.record = record;
+        this.score = record;
 
         restartGameButton = new Texture("restart-game-button.png");
         newRecordImage = new Texture("new-record.png");
@@ -67,8 +65,7 @@ public class EndState extends State {
         record = Records.getRecords();
         recordString = Integer.toString(record);
 
-        recordString = "123";
-        scoreString = "sus";
+        scoreString = Integer.toString(score);
 
         if (score > record) {
             Records.setRecords(score);
