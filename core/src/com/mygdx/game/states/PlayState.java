@@ -1,10 +1,13 @@
 package com.mygdx.game.states;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.mygdx.game.CarPicture;
 import com.mygdx.game.Game;
+
+import java.io.IOException;
 
 public class PlayState extends State {
 
@@ -51,7 +54,7 @@ public class PlayState extends State {
     }
 
     @Override
-    public void render(SpriteBatch batch) {
+    public void render(SpriteBatch batch, BitmapFont font) throws IOException {
         ScreenUtils.clear(1, 0, 0, 1);
         batch.begin();
         batch.draw(background, 0, 0, Game.WIDTH, Game.HEIGHT);
