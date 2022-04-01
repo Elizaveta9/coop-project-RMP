@@ -9,7 +9,6 @@ import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.utils.ScreenUtils;
 import com.mygdx.game.Game;
 import com.mygdx.game.Records;
 
@@ -30,7 +29,7 @@ public class EndState extends State {
     public EndState(StateManager sm, String streetCar, int record) {
         super(sm);
         this.streetCar = streetCar;
-        this.score = record;
+        this.record = record;
 
         restartGameButton = new Texture("restart-game-button.png");
         newRecordImage = new Texture("new-record.png");
@@ -65,9 +64,12 @@ public class EndState extends State {
         batch.setProjectionMatrix(camera.combined);
         batch.begin();
         batch.draw(background, 0, 0, Game.WIDTH, Game.HEIGHT);
-        font.getData().setScale(3,3);
         record = Records.getRecords();
         recordString = Integer.toString(record);
+
+        recordString = "123";
+        scoreString = "sus";
+
         if (score > record) {
             Records.setRecords(score);
             font.draw(batch, scoreString, 380, 630);
