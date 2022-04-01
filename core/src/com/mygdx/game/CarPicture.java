@@ -3,16 +3,19 @@ package com.mygdx.game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Rectangle;
+import com.badlogic.gdx.math.Vector3;
 
 import java.util.HashMap;
 import java.util.Map;
 
 public class CarPicture extends Rectangle {
+    private static final int speed = 300;
     private Texture texture;
     private int line;
     private Map<Integer, Integer> linesX;
     private Boolean isMoving;
     private char direction;
+    private Vector3 position;
 
     public CarPicture(String texture) {
         try {
@@ -34,6 +37,14 @@ public class CarPicture extends Rectangle {
             e.printStackTrace();
         }
 
+    }
+
+    public Vector3 getPosition() {
+        return position;
+    }
+
+    public void setPosition(Vector3 position) {
+        this.position = position;
     }
 
     public Texture getTexture() {
@@ -78,24 +89,29 @@ public class CarPicture extends Rectangle {
         }
     }
 
-    public void move() {
+    public void move(float dt) {
+
+        position.add(0, speed * dt, 0);
+
+//        y += speed*dt;
+
         if (isMoving == true) {
             switch (direction) {
                 case 'r':
-                    if (x < linesX.get(line)) {
-                        x += 600 * Gdx.graphics.getDeltaTime();
+                    if (position.x < linesX.get(line)) {
+                        position.x += 600 * Gdx.graphics.getDeltaTime();
                     } else {
                         isMoving = false;
-                        x = linesX.get(line); // машину потрясывает из-за этой линии
+                        position.x = linesX.get(line); // машину потрясывает из-за этой линии
                     }
                     break;
 
                 case 'l':
-                    if (x > linesX.get(line)) {
-                        x -= 600 * Gdx.graphics.getDeltaTime();
+                    if (position.x > linesX.get(line)) {
+                        position.x -= 600 * Gdx.graphics.getDeltaTime();
                     } else {
                         isMoving = false;
-                        x = linesX.get(line); // машину потрясывает из-за этой линии тоже
+                        position.x = linesX.get(line); // машину потрясывает из-за этой линии тоже
                         // но если эти линии убрать то машина постепенно будет смещаться с центра линий
                     }
                     break;

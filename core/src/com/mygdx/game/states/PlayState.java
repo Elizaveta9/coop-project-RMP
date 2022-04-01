@@ -3,6 +3,8 @@ package com.mygdx.game.states;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.mygdx.game.CarPicture;
 import com.mygdx.game.Game;
@@ -14,14 +16,17 @@ public class PlayState extends State {
     private String streetCar;
     private int record;
     private CarPicture car;
+    private Vector2 backgroundPosition1, backgroundPosition2;
 
 
     public PlayState(StateManager sm, String streetCar) {
         super(sm);
         try {
             car = new CarPicture(streetCar);
-            car.x = car.getLine();
-            car.y = 20;
+            car.setPosition(new Vector3(car.getLine(), 20, 0));
+            backgroundPosition1 = new Vector2(0, camera.position.y - camera.viewportHeight / 2);
+            backgroundPosition2 = new Vector2(0, (camera.position.y - camera.viewportHeight / 2) + (background.getHeight() - 100));
+
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -50,20 +55,36 @@ public class PlayState extends State {
     @Override
     public void update(float dt) {
         handleInput();
-        car.move();
+        updateBackground();
+        car.move(dt);
+
+        camera.position.y = car.getPosition().y + 380;
+        camera.update();
     }
 
     @Override
     public void render(SpriteBatch batch, BitmapFont font) throws IOException {
-        ScreenUtils.clear(1, 0, 0, 1);
+        ScreenUtils.clear(78, 82, 85, 1);
+        batch.setProjectionMatrix(camera.combined);
         batch.begin();
-        batch.draw(background, 0, 0, Game.WIDTH, Game.HEIGHT);
-        batch.draw(car.getTexture(), car.x, car.y);
+        batch.draw(background, backgroundPosition1.x, backgroundPosition1.y, Game.WIDTH, Game.HEIGHT);
+        batch.draw(background, backgroundPosition2.x, backgroundPosition2.y, Game.WIDTH, Game.HEIGHT);
+
+        batch.draw(car.getTexture(), car.getPosition().x, car.getPosition().y);
         batch.end();
     }
 
     @Override
     public void dispose() {
 
+    }
+
+    private void updateBackground() {
+        if (camera.position.y - (camera.viewportHeight / 2) > backgroundPosition1.y + (background.getHeight() - 100)) {
+            backgroundPosition1.add(0, (background.getHeight() - 100) * 2);
+        }
+        if (camera.position.y - (camera.viewportHeight / 2) > backgroundPosition2.y + (background.getHeight() - 100)) {
+            backgroundPosition2.add(0, (background.getHeight() - 100) * 2);
+        }
     }
 }
