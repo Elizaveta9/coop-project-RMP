@@ -9,7 +9,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class CarPicture extends Rectangle {
-    private static final int speed = 300;
+    private static final int speed = 400;
     private Texture texture;
     private int line;
     private Map<Integer, Integer> linesX;

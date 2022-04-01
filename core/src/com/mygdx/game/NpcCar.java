@@ -15,25 +15,33 @@ public class NpcCar extends Rectangle {
 
     private static final int[] arrayLine = {30, 140, 265, 375};
 
-    public NpcCar(Texture car){
+    public NpcCar(Texture car, float y) {
         this.npcCar = car;
         randomLine = new Random();
-        xLine = arrayLine[randomLine.nextInt(3)];
+        xLine = arrayLine[randomLine.nextInt(4)];
         poseCar = new Vector2(xLine, y);
     }
 
-    public Texture getNpcCar(){
+    public Texture getNpcCar() {
         return npcCar;
     }
 
-    public Vector2 getPoseNpcCar(){
+    public void setNpcCar(Texture npcCar) {
+        this.npcCar = npcCar;
+    }
+
+    public Vector2 getPoseNpcCar() {
         return poseCar;
     }
 
-    public  void reposition(int y){
-        poseCar.set(xLine, y);
+    public void setPoseCar(Vector2 poseCar) {
+        this.poseCar = poseCar;
     }
 
+    public void reposition(float y, Texture texture) {
+        poseCar.set(arrayLine[randomLine.nextInt(4)], y);
+        npcCar = texture;
+    }
 
 
 }

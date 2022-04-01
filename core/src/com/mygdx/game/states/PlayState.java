@@ -18,14 +18,14 @@ import java.util.Random;
 
 public class PlayState extends State {
 
-    private static final int countNpcCar = 3;
-
     private String streetCar;
     private int record;
     private CarPicture car;
     private ArrayList<Texture> arrayTextureNpcCar;
     private Array<NpcCar> npcCarArray;
     private Random randomTexture;
+    public static final int CAR_SPACING = 100;
+    public static final int CAR_COUNT = 7;
 
     private Vector2 backgroundPosition1, backgroundPosition2;
 
@@ -62,8 +62,8 @@ public class PlayState extends State {
         npcCarArray = new Array<NpcCar>();
         randomTexture = new Random();
 
-        for (int i = 0; i < countNpcCar; i++) {
-            npcCarArray.add(new NpcCar(arrayTextureNpcCar.get(randomTexture.nextInt(6))));
+        for (int i = 0; i < CAR_COUNT; i++) {
+            npcCarArray.add(new NpcCar(arrayTextureNpcCar.get(randomTexture.nextInt(7)), i * (CAR_SPACING + 170)));
         }
     }
 
@@ -93,6 +93,13 @@ public class PlayState extends State {
         updateBackground();
         car.move(dt);
 
+        for (NpcCar npcCar : npcCarArray) {
+            if (camera.position.y - (camera.viewportHeight / 2) > npcCar.getPoseNpcCar().y + npcCar.getNpcCar().getHeight()) {
+                npcCar.reposition(npcCar.getPoseNpcCar().y + (170 + CAR_SPACING) * CAR_COUNT,
+                        arrayTextureNpcCar.get(randomTexture.nextInt(7)));
+            }
+        }
+
         camera.position.y = car.getPosition().y + 380;
         camera.update();
     }
@@ -104,12 +111,10 @@ public class PlayState extends State {
         batch.begin();
         batch.draw(background, backgroundPosition1.x, backgroundPosition1.y, Game.WIDTH, Game.HEIGHT);
         batch.draw(background, backgroundPosition2.x, backgroundPosition2.y, Game.WIDTH, Game.HEIGHT);
-
-        try{
-        batch.draw(car.getTexture(), car.getPosition().x, car.getPosition().y);
-        } catch (Exception e){
-            e.printStackTrace();
+        for (NpcCar npcCar : npcCarArray) {
+            batch.draw(npcCar.getNpcCar(), npcCar.getPoseNpcCar().x, npcCar.getPoseNpcCar().y);
         }
+        batch.draw(car.getTexture(), car.getPosition().x, car.getPosition().y);
         batch.end();
     }
 
