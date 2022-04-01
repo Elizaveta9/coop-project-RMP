@@ -8,6 +8,7 @@ import java.util.Random;
 
 public class NpcCar extends Rectangle {
 
+
     private Texture npcCar;
     private Vector2 poseCar;
     private Random randomLine;
@@ -53,6 +54,7 @@ public class NpcCar extends Rectangle {
         poseCar.set(arrayLine[randomLine.nextInt(4)], y);
         npcCar = texture;
     }
+
 
 
 }
