@@ -20,7 +20,8 @@ public class CarPicture extends Rectangle {
     public CarPicture(String texture) {
         try {
             this.texture = new Texture(texture);
-
+            width = this.texture.getWidth();
+            height = this.texture.getHeight();
             isMoving = false;
 
             direction = 'r';
@@ -116,5 +117,7 @@ public class CarPicture extends Rectangle {
                     break;
             }
         }
+        x = position.x;
+        y = position.y;
     }
 }

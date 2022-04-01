@@ -17,6 +17,8 @@ public class NpcCar extends Rectangle {
 
     public NpcCar(Texture car, float y) {
         this.npcCar = car;
+        width = npcCar.getWidth();
+        height= npcCar.getHeight();
         randomLine = new Random();
         xLine = arrayLine[randomLine.nextInt(4)];
         poseCar = new Vector2(xLine, y);
@@ -42,6 +44,4 @@ public class NpcCar extends Rectangle {
         poseCar.set(arrayLine[randomLine.nextInt(4)], y);
         npcCar = texture;
     }
-
-
 }
