@@ -12,16 +12,25 @@ public class NpcCar extends Rectangle {
     private Vector2 poseCar;
     private Random randomLine;
     private int xLine;
+    private static int count = 3;
 
-    private static final int[] arrayLine = {30, 140, 265, 375};
+    private static final int[] arrayLine =  {140, 265, 375, 30,};
 
     public NpcCar(Texture car, float y) {
-        this.npcCar = car;
-        width = npcCar.getWidth();
-        height= npcCar.getHeight();
-        randomLine = new Random();
-        xLine = arrayLine[randomLine.nextInt(4)];
-        poseCar = new Vector2(xLine, y);
+
+        if (count <= 0){
+            this.npcCar = car;
+            randomLine = new Random();
+            xLine = arrayLine[randomLine.nextInt(4)];
+            poseCar = new Vector2(xLine, y);
+        }else{
+            this.npcCar = car;
+            randomLine = new Random();
+            xLine = arrayLine[randomLine.nextInt(3)];
+            poseCar = new Vector2(xLine, y);
+        }
+        count--;
+
     }
 
     public Texture getNpcCar() {
@@ -44,4 +53,6 @@ public class NpcCar extends Rectangle {
         poseCar.set(arrayLine[randomLine.nextInt(4)], y);
         npcCar = texture;
     }
+
+
 }
