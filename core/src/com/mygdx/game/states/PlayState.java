@@ -31,8 +31,10 @@ public class PlayState extends State {
 
 
     public PlayState(StateManager sm, String streetCar) {
-
         super(sm);
+
+        NpcCar.count = 3;
+
         try {
             car = new CarPicture(streetCar);
             car.setPosition(new Vector3(car.getLine(), 20, 0));
