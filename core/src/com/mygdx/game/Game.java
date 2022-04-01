@@ -2,7 +2,7 @@ package com.mygdx.game;
 
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.ScreenUtils;
@@ -14,7 +14,7 @@ import java.io.IOException;
 public class Game extends ApplicationAdapter {
 	public static final int WIDTH = 480;
 	public static final int HEIGHT = 800;
-	public static final String TITLE = "Шашки в москве";
+	public static final String TITLE = "Checkers in Moscow";
 
 	private StateManager stateManager;
 
@@ -23,7 +23,13 @@ public class Game extends ApplicationAdapter {
 
 	@Override
 	public void create () {
-		font = new BitmapFont();
+		FreeTypeFontGenerator fontGenerator = new FreeTypeFontGenerator(Gdx.files.internal("font.ttf"));
+		FreeTypeFontGenerator.FreeTypeFontParameter fontParameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
+		fontParameter.color = Color.WHITE;
+		fontParameter.size = 40;
+
+		font = fontGenerator.generateFont(fontParameter);
+
 		batch = new SpriteBatch();
 		stateManager = new StateManager();
 		ScreenUtils.clear(1, 0, 0, 1);
