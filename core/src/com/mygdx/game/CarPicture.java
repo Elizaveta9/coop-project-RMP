@@ -33,6 +33,7 @@ public class CarPicture extends Rectangle {
             linesX.put(4, 375);
 
             line = 1;
+
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -92,8 +93,6 @@ public class CarPicture extends Rectangle {
     public void move(float dt) {
 
         position.add(0, speed * dt, 0);
-
-//        y += speed*dt;
 
         if (isMoving == true) {
             switch (direction) {

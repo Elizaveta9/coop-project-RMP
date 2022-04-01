@@ -41,6 +41,7 @@ public class PlayState extends State {
 
         } catch (Exception e) {
             e.printStackTrace();
+        }
 
         Texture npcAbobusCar = new Texture("npcAbobusCar.png");
         Texture npcMedCar = new Texture("npcMedCar.png");
@@ -58,14 +59,10 @@ public class PlayState extends State {
         arrayTextureNpcCar.add(npcPoliceCar);
         arrayTextureNpcCar.add(npcTaxiCar);
 
-        car = new CarPicture(streetCar);
-        car.x = car.getLine();
-        car.y = 20;
-
         npcCarArray = new Array<NpcCar>();
         randomTexture = new Random();
 
-        for (int i = 0; i < countNpcCar; i++ ){
+        for (int i = 0; i < countNpcCar; i++) {
             npcCarArray.add(new NpcCar(arrayTextureNpcCar.get(randomTexture.nextInt(6))));
         }
     }
@@ -108,7 +105,11 @@ public class PlayState extends State {
         batch.draw(background, backgroundPosition1.x, backgroundPosition1.y, Game.WIDTH, Game.HEIGHT);
         batch.draw(background, backgroundPosition2.x, backgroundPosition2.y, Game.WIDTH, Game.HEIGHT);
 
+        try{
         batch.draw(car.getTexture(), car.getPosition().x, car.getPosition().y);
+        } catch (Exception e){
+            e.printStackTrace();
+        }
         batch.end();
     }
 
