@@ -1,7 +1,9 @@
 package com.mygdx.game.states;
 
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
+import java.io.IOException;
 import java.util.Stack;
 
 /*
@@ -38,8 +40,8 @@ public class StateManager {
     }
 
     //отрисовывает текущее состояние (экран)
-    public void render(SpriteBatch batch){
-        states.peek().render(batch);
+    public void render(SpriteBatch batch, BitmapFont font) throws IOException {
+        states.peek().render(batch, font);
     }
 
 

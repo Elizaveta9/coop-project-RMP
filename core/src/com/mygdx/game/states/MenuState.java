@@ -5,7 +5,10 @@ package com.mygdx.game.states;
  */
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Music;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.mygdx.game.Game;
 
@@ -13,11 +16,18 @@ public class MenuState extends State {
 
     private Texture newGameButton;
     private Texture logo;
+    private Sound tapSound;
+    private Music music;
 
     public MenuState(StateManager sm) {
         super(sm);
         newGameButton = new Texture("new-game-button.png");
         logo = new Texture("logo.png");
+        tapSound = Gdx.audio.newSound(Gdx.files.internal("buttonClick.mp3"));
+        music = Gdx.audio.newMusic(Gdx.files.internal("music.mp3"));
+        music.setLooping(true);
+        music.setVolume(0.1f);
+        music.play();
     }
 
     @Override
@@ -29,6 +39,7 @@ public class MenuState extends State {
                     (mouse.x < (Game.WIDTH / 2) + (newGameButton.getWidth() / 2)) &&
                     (mouse.y > (Game.HEIGHT / 3)) &&
                     (mouse.y < (Game.HEIGHT / 3) + newGameButton.getHeight())) {
+                tapSound.play(0.3f);
                 sm.set(new SkinState(sm));
             }
         }
@@ -40,7 +51,7 @@ public class MenuState extends State {
     }
 
     @Override
-    public void render(SpriteBatch batch) {
+    public void render(SpriteBatch batch, BitmapFont font) {
         batch.setProjectionMatrix(camera.combined);
 
         batch.begin();
