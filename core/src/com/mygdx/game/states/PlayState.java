@@ -1,13 +1,10 @@
 package com.mygdx.game.states;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.mygdx.game.CarPicture;
 import com.mygdx.game.Game;
-
-import java.util.List;
 
 public class PlayState extends State {
 
@@ -34,7 +31,6 @@ public class PlayState extends State {
             mouse.set(Gdx.input.getX(), Gdx.input.getY(), 0);
             camera.unproject(mouse);
             if (mouse.x > (Game.WIDTH / 2)) {
-//                car.x = car.getRightLine();
                 car.goRight();
             }
         }
@@ -43,7 +39,6 @@ public class PlayState extends State {
             mouse.set(Gdx.input.getX(), Gdx.input.getY(), 0);
             camera.unproject(mouse);
             if (mouse.x < (Game.WIDTH / 2)) {
-//                car.x = car.getLeftLine();
                 car.goLeft();
             }
         }

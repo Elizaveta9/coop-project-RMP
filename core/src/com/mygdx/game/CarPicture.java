@@ -79,10 +79,10 @@ public class CarPicture extends Rectangle {
     }
 
     public void move() {
-        if (isMoving == true){
-            switch (direction){
+        if (isMoving == true) {
+            switch (direction) {
                 case 'r':
-                    if (x < linesX.get(line)){
+                    if (x < linesX.get(line)) {
                         x += 600 * Gdx.graphics.getDeltaTime();
                     } else {
                         isMoving = false;
@@ -91,17 +91,15 @@ public class CarPicture extends Rectangle {
                     break;
 
                 case 'l':
-                    if (x > linesX.get(line)){
+                    if (x > linesX.get(line)) {
                         x -= 600 * Gdx.graphics.getDeltaTime();
                     } else {
                         isMoving = false;
                         x = linesX.get(line); // машину потрясывает из-за этой линии тоже
-                                            // но если эти линии убрать то машина постепенно будет смещаться с центра линий
+                        // но если эти линии убрать то машина постепенно будет смещаться с центра линий
                     }
                     break;
             }
         }
-
-
-        }
     }
+}
