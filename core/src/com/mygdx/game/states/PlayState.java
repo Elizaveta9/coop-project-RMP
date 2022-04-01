@@ -18,6 +18,7 @@ import java.util.Random;
 
 public class PlayState extends State {
 
+    private static final int ahalay = 100;
     private static final int countNpcCar = 3;
 
     private String streetCar;
@@ -26,6 +27,7 @@ public class PlayState extends State {
     private ArrayList<Texture> arrayTextureNpcCar;
     private Array<NpcCar> npcCarArray;
     private Random randomTexture;
+    private NpcCar npcCar;
 
     private Vector2 backgroundPosition1, backgroundPosition2;
 
@@ -63,7 +65,7 @@ public class PlayState extends State {
         randomTexture = new Random();
 
         for (int i = 0; i < countNpcCar; i++) {
-            npcCarArray.add(new NpcCar(arrayTextureNpcCar.get(randomTexture.nextInt(6))));
+            npcCarArray.add(new NpcCar( arrayTextureNpcCar.get(randomTexture.nextInt(6)), i* ahalay));
         }
     }
 
@@ -90,10 +92,17 @@ public class PlayState extends State {
     @Override
     public void update(float dt) {
         handleInput();
+
+        camera.position.y = car.getPosition().y + 380;
+        for (NpcCar npcCar : npcCarArray){
+            if (camera.position.y - (camera.viewportHeight / 2) > npcCar.getNpcCar().getHeight()){
+                npcCar.reposition(npcCar.getPoseNpcCar().y + ahalay * countNpcCar );
+            }
+        }
         updateBackground();
         car.move(dt);
 
-        camera.position.y = car.getPosition().y + 380;
+
         camera.update();
     }
 
@@ -109,6 +118,9 @@ public class PlayState extends State {
         batch.draw(car.getTexture(), car.getPosition().x, car.getPosition().y);
         } catch (Exception e){
             e.printStackTrace();
+        }
+        for (NpcCar npcCar: npcCarArray){
+            batch.draw(npcCar.getNpcCar(), npcCar.getPoseNpcCar().x, npcCar.getPoseNpcCar().y);
         }
         batch.end();
     }

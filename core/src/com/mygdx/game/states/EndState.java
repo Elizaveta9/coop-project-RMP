@@ -27,31 +27,41 @@ public class EndState extends State {
     private String recordString;
     private String scoreString;
 
-    public EndState(StateManager sm, String streetCar, int record) {
+    public EndState(StateManager sm, int record) {
         super(sm);
-        this.streetCar = streetCar;
-        this.score = record;
+        try {
 
-        restartGameButton = new Texture("restart-game-button.png");
-        newRecordImage = new Texture("new-record.png");
-        oldRecordImage = new Texture("old-record.png");
-        tapSound = Gdx.audio.newSound(Gdx.files.internal("buttonClick.mp3"));
-        recordString = Integer.toString(record);
-        scoreString = Integer.toString(score);
+            this.streetCar = streetCar;
+            this.score = record;
+
+            restartGameButton = new Texture("restart-game-button.png");
+            newRecordImage = new Texture("new-record.png");
+            oldRecordImage = new Texture("old-record.png");
+            tapSound = Gdx.audio.newSound(Gdx.files.internal("buttonClick.mp3"));
+            recordString = Integer.toString(record);
+            scoreString = Integer.toString(score);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
+
 
     @Override
     protected void handleInput() {
-        if (Gdx.input.justTouched()) {
-            mouse.set(Gdx.input.getX(), Gdx.input.getY(), 0);
-            camera.unproject(mouse);
-            if ((mouse.x > (Game.WIDTH / 2) - (restartGameButton.getWidth() / 2)) &&
-                    (mouse.x < (Game.WIDTH / 2) + (restartGameButton.getWidth() / 2)) &&
-                    (mouse.y > (Game.HEIGHT / 3)) &&
-                    (mouse.y < (Game.HEIGHT / 3) + restartGameButton.getHeight())) {
-                tapSound.play(0.3f);
-                sm.set(new SkinState(sm));
+        try {
+            if (Gdx.input.justTouched()) {
+                mouse.set(Gdx.input.getX(), Gdx.input.getY(), 0);
+                camera.unproject(mouse);
+                if ((mouse.x > (Game.WIDTH / 2) - (restartGameButton.getWidth() / 2)) &&
+                        (mouse.x < (Game.WIDTH / 2) + (restartGameButton.getWidth() / 2)) &&
+                        (mouse.y > (Game.HEIGHT / 3)) &&
+                        (mouse.y < (Game.HEIGHT / 3) + restartGameButton.getHeight())) {
+                    tapSound.play(0.3f);
+                    sm.set(new SkinState(sm));
+                }
             }
+        }catch (Exception e){
+            e.printStackTrace();
         }
     }
 

@@ -15,7 +15,7 @@ public class NpcCar extends Rectangle {
 
     private static final int[] arrayLine = {30, 140, 265, 375};
 
-    public NpcCar(Texture car){
+    public NpcCar(Texture car, float y){
         this.npcCar = car;
         randomLine = new Random();
         xLine = arrayLine[randomLine.nextInt(3)];
@@ -30,7 +30,7 @@ public class NpcCar extends Rectangle {
         return poseCar;
     }
 
-    public  void reposition(int y){
+    public  void reposition(float y){
         poseCar.set(xLine, y);
     }
 
