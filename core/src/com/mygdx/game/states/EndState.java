@@ -33,7 +33,6 @@ public class EndState extends State {
 
         restartGameButton = new Texture("restart-game-button.png");
         newRecordImage = new Texture("new-record.png");
-//        oldRecordImage = new Texture("old-record.png");
         oldRecordImage = new Texture("record.png");
         tapSound = Gdx.audio.newSound(Gdx.files.internal("buttonClick.mp3"));
         recordString = Integer.toString(record);
@@ -65,11 +64,8 @@ public class EndState extends State {
         batch.setProjectionMatrix(camera.combined);
         batch.begin();
         batch.draw(background, 0, 0, Game.WIDTH, Game.HEIGHT);
-//        record = Records.getRecords();
         recordString = Integer.toString(record);
 
-//        recordString = "123";
-//        scoreString = "sus";
 
         if (score > record) {
             Records.setRecords(score);
@@ -77,8 +73,7 @@ public class EndState extends State {
             batch.draw(newRecordImage, (Game.WIDTH / 2) - (newRecordImage.getWidth() / 2 + 60), Game.HEIGHT - newRecordImage.getHeight() - 20);
         } else {
             batch.draw(oldRecordImage, (Game.WIDTH / 2) - (oldRecordImage.getWidth() / 2 + 60), Game.HEIGHT - oldRecordImage.getHeight() - 20);
-            font.draw(batch, recordString, 380, 720);
-//            font.draw(batch, scoreString, 380, 630);
+            font.draw(batch, recordString, 380, 750);
         }
         batch.draw(restartGameButton, (Game.WIDTH / 2) - (restartGameButton.getWidth() / 2), Game.HEIGHT / 3);
         batch.end();

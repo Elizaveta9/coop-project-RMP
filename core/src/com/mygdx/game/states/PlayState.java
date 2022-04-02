@@ -98,13 +98,14 @@ public class PlayState extends State {
         for (NpcCar npcCar : npcCarArray) {
             npcCar.x= npcCar.getPoseNpcCar().x;
             npcCar.y= npcCar.getPoseNpcCar().y;
+
             if (camera.position.y - (camera.viewportHeight / 2) > npcCar.getPoseNpcCar().y + npcCar.getNpcCar().getHeight()) {
                 npcCar.reposition(npcCar.getPoseNpcCar().y + (170 + CAR_SPACING) * CAR_COUNT,
                         arrayTextureNpcCar.get(randomTexture.nextInt(7)));
             }
+
             if(car.overlaps(npcCar.pointsBounds)){
                 record +=1;
-                System.out.println(record);
             }
 
             if(car.overlaps(npcCar)){
