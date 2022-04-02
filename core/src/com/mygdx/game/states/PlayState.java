@@ -19,7 +19,7 @@ import java.util.Random;
 public class PlayState extends State {
 
     private String streetCar;
-    private int record;
+    private int record = 0;
     private CarPicture car;
     private ArrayList<Texture> arrayTextureNpcCar;
     private Array<NpcCar> npcCarArray;
@@ -101,6 +101,10 @@ public class PlayState extends State {
             if (camera.position.y - (camera.viewportHeight / 2) > npcCar.getPoseNpcCar().y + npcCar.getNpcCar().getHeight()) {
                 npcCar.reposition(npcCar.getPoseNpcCar().y + (170 + CAR_SPACING) * CAR_COUNT,
                         arrayTextureNpcCar.get(randomTexture.nextInt(7)));
+            }
+            if(car.overlaps(npcCar.pointsBounds)){
+                record +=1;
+                System.out.println(record);
             }
 
             if(car.overlaps(npcCar)){

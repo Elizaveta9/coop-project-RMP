@@ -13,6 +13,7 @@ public class NpcCar extends Rectangle {
     private Random randomLine;
     private int xLine;
     public static int count;
+    public Rectangle pointsBounds;
 
     private static final int[] arrayLine = {140, 265, 375, 30,};
 
@@ -22,17 +23,25 @@ public class NpcCar extends Rectangle {
         width = npcCar.getWidth();
         height = npcCar.getHeight();
 
+        pointsBounds = new Rectangle();
+
+        pointsBounds.width = 800;
+        pointsBounds.height = 1;
+
         if (count <= 0) {
             randomLine = new Random();
             xLine = arrayLine[randomLine.nextInt(4)];
             poseCar = new Vector2(xLine, y);
-            count=0;
+            count = 0;
         } else {
             randomLine = new Random();
             xLine = arrayLine[randomLine.nextInt(3)];
             poseCar = new Vector2(xLine, y);
         }
         count--;
+
+        pointsBounds.y = poseCar.y + (car.getHeight() / 2);
+        pointsBounds.x = 0;
 
     }
 
@@ -55,7 +64,7 @@ public class NpcCar extends Rectangle {
     public void reposition(float y, Texture texture) {
         poseCar.set(arrayLine[randomLine.nextInt(4)], y);
         npcCar = texture;
+        pointsBounds.y = poseCar.y + (npcCar.getHeight() / 2);
+        pointsBounds.x = 0;
     }
-
-
 }
