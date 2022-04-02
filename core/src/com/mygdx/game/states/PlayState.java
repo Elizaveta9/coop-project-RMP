@@ -1,6 +1,7 @@
 package com.mygdx.game.states;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -26,6 +27,7 @@ public class PlayState extends State {
     private Random randomTexture;
     public static final int CAR_SPACING = 100;
     public static final int CAR_COUNT = 7;
+    private Sound carCrash;
 
     private Vector2 backgroundPosition1, backgroundPosition2;
 
@@ -36,6 +38,7 @@ public class PlayState extends State {
         NpcCar.count = 3;
 
         try {
+            carCrash = Gdx.audio.newSound(Gdx.files.internal("carCrash.mp3"));
             car = new CarPicture(streetCar);
             car.setPosition(new Vector3(car.getLine(), 20, 0));
             backgroundPosition1 = new Vector2(0, camera.position.y - camera.viewportHeight / 2);
@@ -104,7 +107,9 @@ public class PlayState extends State {
             }
 
             if(car.overlaps(npcCar)){
-                sm.set(new EndState(sm, streetCar, record));
+                carCrash.play();
+                sm.set(new EndState(sm, streetCar, 2));
+
             }
 
         }
